@@ -8,6 +8,8 @@ import Messages from "./Messages";
 import { IChatState } from './helpers/interfaces/IChatState';
 import { IMembers } from './helpers/interfaces/IMembers';
 import { IMessage } from './helpers/interfaces/IMessage';
+import { IClientData } from './helpers/interfaces/IClientData';
+import { IMessages } from './helpers/interfaces/IMessages';
 
 const App = (): JSX.Element => {
     const initChatState: IChatState = {
@@ -52,20 +54,20 @@ const App = (): JSX.Element => {
                     console.log("Connected to the room");
                 }
             });
-            room.on("members", (m) => {
+            room.on("members", (m: Array<IClientData>) => {
                 setMembers({ online: m });
             });
 
-            room.on("member_join", (newMember) => {
+            room.on("member_join", (newMember: IClientData) => {
                 setMembers((prevMembers) => ({
                     ...prevMembers,
                     online: [...prevMembers.online, newMember],
                 }));
             });
 
-            room.on("member_leave", ({ id }) => {
+            room.on("member_leave", ({ id }: string) => { //How is it not string?
                 setMembers((prevMembers) => { 
-                    const index = prevMembers.online.findIndex(
+                    const index: number = prevMembers.online.findIndex(
                       (member) => member.id === id
                     );
                     return {
@@ -78,7 +80,7 @@ const App = (): JSX.Element => {
                   });
             });
 
-            room.on("message", (message) => {
+            room.on("message", (message: IMessages) => {
                 setChat((prevChat) => ({
                     ...prevChat,
                     messages: [...prevChat.messages, message],

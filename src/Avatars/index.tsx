@@ -1,14 +1,15 @@
+import { TPropsFromLogin } from '../helpers/types/TPropsFromLogin';
 import './avatars.scss';
 
-const Avatars = ({ random, getAvatar, avatarAnimation, selectedAvatar }) => {
-    const avatars = [];
+const Avatars = ({ random, getAvatar, avatarAnimation, selectedAvatar }: TPropsFromLogin) => {
+    const avatars: Array<string> = [];
     for (let i = 1; i <= 6; i++) {
         const path = `/avatars/avatar${i}.png`;
         avatars.push(path);
     }
 
-    const renderAvatars = (avatar, index) => {
-        const image_alt = `avatar${index}`;
+    const renderAvatars = (avatar: string, index: number) => {
+        const image_alt = `avatar${index + 1}`;
         return (
             <li
                 className={
