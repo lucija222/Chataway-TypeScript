@@ -1,0 +1,48 @@
+.emoji-container {
+    max-width: 100vw;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.emoji-categories-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.emoji-category {
+    padding: 10px max(3%);
+    &:hover {
+        cursor: pointer;
+        background-color: gainsboro;
+    }
+}
+
+.emoji-category img {
+    height: 22px;
+    opacity: 0.8;
+}
+
+.emoji-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 123px;
+    padding: 10px 10px 10px 20px;
+    overflow-y: scroll;
+    justify-content: flex-start;
+    align-content: flex-start;
+    border-top: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.emoji {
+    padding: 7px;
+    width: 23px;
+    height: 19px;
+
+    &:hover {
+        background-color: gainsboro;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,67 @@
+$flex: flex;
+$px15: 15px;
+
+//-------------------GENERAL
+.chat__header {
+    background: rgb(0, 209, 224);
+    background: radial-gradient(
+        circle,
+        rgba(0, 209, 224, 1) 45%,
+        rgba(0, 126, 173, 1) 70%,
+        rgba(1, 74, 129, 1) 100%
+    );
+    width: 100vw;
+    height: 56px;
+    display: $flex;
+    justify-content: center;
+    padding-top: $px15;
+}
+
+.header__heading {
+    font-size: 36px;
+    color: rgb(1, 59, 104);
+    font-weight: 900;
+}
+
+//----------------MEMBERS LIST
+.onlineMembers-container {
+    background: rgb(1, 42, 73);
+    display: $flex;
+    flex-direction: row;
+    color: #c7dde6;
+    font-size: 17px;
+    padding: $px15;
+}
+
+.onlineMembers-container > span, .onlineMembers-container ul {
+    row-gap: 7px;
+}
+
+.onlineMembers {
+    list-style-type: none;
+    display: $flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.onlineMembers__member {
+    padding-left: 10px;
+    display: $flex;
+    flex-wrap: nowrap;
+}
+
+.onlineMembers__username {
+    padding-left: 3px;
+}
+
+.onlineMembers__avatar {
+    display: inline-block;
+    height: $px15;
+}
+
+.onlineMembers__color {
+    height: $px15;
+    width: $px15;
+    display: inline-block;
+    border-radius: 50%;
+}
