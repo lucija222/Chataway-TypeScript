@@ -15,9 +15,10 @@ const Login = ({ setChat }) => {
     const [random, setRandom] = useState<boolean>(false);
 
     const getAvatar: MouseEventHandler<HTMLImageElement> = (e) => {
-        if (!random) { //SHOULD WORK but doesn't - check
-            setAvatar(e.target.src); 
-            setSelectedAvatar(e.target.alt);
+        if (!random) { 
+            const target = e.target as HTMLImageElement;
+            setAvatar(target.src); 
+            setSelectedAvatar(target.alt);
         }
     };
 
