@@ -1,0 +1,42 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, ol, ul, li, form, label,
+figure, figcaption {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+figcaption, figure{
+	display: block;
+}
+body {
+  line-height: 1;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+textarea:focus,
+input:focus,
+button:focus,
+select:focus {
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.chat {
+    min-width: 350px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}

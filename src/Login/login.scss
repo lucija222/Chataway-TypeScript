@@ -1,0 +1,157 @@
+//---------------------VARIABLES
+$font20: 20px;
+$light-base-color: #21d3f7;
+$dark-base-color: #025683;
+$off-white-color: #e3f7ff;
+$white: white;
+$flex: flex;
+
+//--------------------PLACEHOLDER SELECTORS
+%figcaption {
+    font-size: 28px;
+    color: $white;
+    position: absolute;
+    background-color: #11171b;
+    padding: 0 6px;
+}
+
+%input {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+%input-label {
+    padding-bottom: 5px;
+    font-size: $font20;
+}
+
+//----------GENERAL
+.form-container {
+    display: $flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: rgb(0, 209, 224);
+    background: radial-gradient(
+        circle,
+        rgb(0, 209, 224) 45%,
+        rgb(0, 126, 173) 87%,
+        rgb(1, 74, 129) 100%
+    );
+}
+
+.login-form {
+    padding: 55px 60px;
+    display: $flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 15px;
+    align-items: center;
+    background-color: #11171b;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.orDiv {
+    font-size: 22px;
+    color: $white;
+    padding: 10px 0 20px;
+    font-weight: 500;
+}
+
+#login-form__submit-button {
+    transform: translateY(25%);
+    padding: 5px 10px;
+    font-size: $font20;
+    border: 3px solid $dark-base-color;
+    border-radius: 3px;
+    background-color: $dark-base-color;
+    color: $off-white-color;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $light-base-color;
+        color: $dark-base-color;
+        border-color: $light-base-color;
+    }
+}
+
+//--------------------------CUSTOMIZE USER
+.login-form__input-label {
+    @extend %input-label;
+    color: $light-base-color;
+}
+
+.login-form__input-label-disabled {
+    @extend %input-label;
+    color: rgb(78, 78, 78);
+}
+
+.login-form__input {
+    @extend %input;
+    border: 3px solid $light-base-color;
+    background-color: #d8e8ee;
+
+    &:hover {
+        background-color: #b3e9ff;
+    }
+}
+
+.login-form__input-disabled {
+    @extend %input;
+    border: 3px solid #acacac;
+    background-color: #d3cfcf;
+}
+
+.login-form__span {
+    margin-top: 10px;
+    font-size: $font20;
+    color: $off-white-color;
+}
+
+.login-form__span--disabled {
+    color: rgb(78, 78, 78);
+}
+
+.login-form__random-checkbox {
+    margin-top: 10px;
+    font-size: $font20;
+    color: $light-base-color;
+}
+
+.checkbox-text:hover {
+    cursor: pointer;
+}
+
+figure {
+    position: relative;
+    border: 2px solid rgba(white, 0.2);
+    border-radius: 4px;
+    padding: 15px;
+}
+
+#figcaption1 {
+    @extend %figcaption;
+    bottom: 97%;
+    left: 16%;
+}
+
+.customizeUser {
+    display: $flex;
+    flex-direction: column;
+    padding: 20px 20px 3px 20px;
+}
+
+//--------------RANDOMIZE USER
+#figcaption2 {
+    @extend %figcaption;
+    bottom: 85%;
+    left: 15%;
+}
+
+.randomizeUser {
+    color: $white;
+    padding: 10px 17.5px;
+}

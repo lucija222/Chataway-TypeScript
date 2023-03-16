@@ -1,0 +1,67 @@
+$zero-px: 0px;
+
+.login-form__avatar-list {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 240px;
+    padding-top: 10px;
+    row-gap: 11px;
+  }
+  
+  .avatar {
+    margin: 5px;
+    width: 63px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    padding: 5px 0;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+      }
+  }
+  
+  .avatar__selected {
+    background-color: rgb(35, 62, 83);
+    border-color: rgb(45, 202, 255);
+    transform: scale(1.2);
+  }
+  
+  .avatar__disabled {
+    opacity: 0.5;
+    border: $zero-px none transparent;
+    transition: none;
+
+    &:hover {
+        cursor: initial;
+        transform: none;
+        border-width: $zero-px;
+      }
+  }
+  
+  .avatar__animation {
+    animation-name: flash;
+    animation-duration: 0.8s;
+  }
+  
+  @keyframes flash {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(1.15);
+    }
+    40% {
+      transform: scale(1);
+    }
+    80% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
