@@ -17,11 +17,12 @@ const App = (): JSX.Element => {
             username: "",
             color: "",
             avatar: "",
+            id: ""
         },
         messages: [],
     };
 
-    const [chat, setChat] = useState<IChatState>(initChatState);
+    const [chat, setChat]/*: [IChatState, (value: ((prevState: IChatState) => IChatState)) => void]*/ = useState<IChatState>(initChatState);
     const [members, setMembers] = useState<IMembers>({ online: [] });
     const [drone, setDrone] = useState(null);
 
@@ -93,7 +94,7 @@ const App = (): JSX.Element => {
         }
     }, [chat, drone, members]);
 
-    const publishMessage = (messageObj: IMessage) => {
+    const publishMessage = (messageObj: IMessage): void => {
         drone.publish(messageObj);
     };
 
@@ -111,7 +112,7 @@ const App = (): JSX.Element => {
                         messages={chat.messages}
                         thisMember={chat.member}
                     />
-                    <MessageInput sendMessage={publishMessage} />
+                    <MessageInput publishMessage={publishMessage} />
                 </div>
             )}
         </>
