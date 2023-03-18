@@ -1,6 +1,7 @@
+import { TChatHeaderProps } from "../helpers/types/TChatHeaderProps";
 import "./chatHeader.scss";
 
-const ChatHeader = ({  members }) => {
+const ChatHeader = ({  members }: TChatHeaderProps): JSX.Element => {
     return (
         <div>
             <div className="chat__header">
