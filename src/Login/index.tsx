@@ -1,20 +1,21 @@
 import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useState } from "react";
 import Avatars from "../Avatars/index.jsx";
 import { IChatState } from "../helpers/interfaces/IChatState.js";
+import { TLoginProps } from "../helpers/types/TLoginProps.js";
 import {
     generateRandomColor,
     generateRandomName,
 } from "../util/helperFunctions.js";
 import "./login.scss";
 
-const Login = ({ setChat }) => {
+const Login = ({ setChat }: TLoginProps): JSX.Element => {
     const [avatar, setAvatar] = useState<string>("");
     const [username, setUsername] = useState<string>("");
     const [avatarAnimation, setAvatarAnimation] = useState<boolean>(false);
     const [selectedAvatar, setSelectedAvatar] = useState<string>("");
     const [random, setRandom] = useState<boolean>(false);
 
-    const getAvatar: MouseEventHandler<HTMLImageElement> = (e) => {
+    const getAvatar: MouseEventHandler<HTMLImageElement> = (e): void  => {
         if (!random) { 
             const target = e.target as HTMLImageElement;
             setAvatar(target.src); 
@@ -22,11 +23,11 @@ const Login = ({ setChat }) => {
         }
     };
 
-    const getUsername: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const getUsername: ChangeEventHandler<HTMLInputElement> = (e): void => {
         setUsername(e.target.value);
     };
 
-    const getRandom: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const getRandom: ChangeEventHandler<HTMLInputElement> = (e): void => {
         if (e.target.checked) {
             setRandom(true);
             setUsername("");
@@ -37,7 +38,7 @@ const Login = ({ setChat }) => {
         }
     };
 
-    const handleFormSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    const handleFormSubmit: FormEventHandler<HTMLFormElement> = (e): void => {
         e.preventDefault();
         if (random) {
             setChat((prevChat: IChatState) => ({ 
@@ -92,7 +93,7 @@ const Login = ({ setChat }) => {
                             required
                             value={username}
                             onChange={getUsername}
-                            disabled={random} //Check if this works right
+                            disabled={random} 
                         />
                         <br />
                         <span
