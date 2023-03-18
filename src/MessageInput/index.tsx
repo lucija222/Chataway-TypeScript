@@ -1,24 +1,26 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, ChangeEventHandler, FormEventHandler, MouseEventHandler } from "react";
 import Emojis from "../Emojis";
+import { IInitInput } from "../helpers/interfaces/IInitInput";
+import { TMessageInputProps } from "../helpers/types/TMessageInputProps";
 import "./messageInput.scss";
 
-const MessageInput = ({ publishMessage }) => {
-    const placeholder = [
+const MessageInput = ({ publishMessage }: TMessageInputProps): JSX.Element => {
+    const placeholder: Array<string> = [
         "Enter your message...",
-        "Please type something first!",
+        "Please type something first!"
     ];
-    const initInput = { text: "", placeholder: placeholder[0] };
-    const [input, setInput] = useState(initInput);
-    const [isEmojiPickerShowing, setIsEmojiPickerShowing] = useState(false);
-    const inputRef = useRef(null);
+    const initInput: IInitInput = { text: "", placeholder: placeholder[0] };
+    const [input, setInput] = useState<IInitInput>(initInput);
+    const [isEmojiPickerShowing, setIsEmojiPickerShowing] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement>(null!);
 
     useEffect(() => inputRef.current.focus(), [input]);
 
-    const handleInputChange = (e) => {
+    const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
         setInput({ ...input, text: e.target.value });
     };
 
-    const publishInput = (e) => {
+    const publishInput: FormEventHandler<HTMLFormElement> = (e): void => {
         e.preventDefault();
         e.stopPropagation();
         if (input.text === "") {
@@ -36,17 +38,18 @@ const MessageInput = ({ publishMessage }) => {
         }
     };
 
-    const toggleEmojiPicker = (e) => {
+    const toggleEmojiPicker: MouseEventHandler<HTMLButtonElement> = (e): void => {
         e.stopPropagation();
         setIsEmojiPickerShowing(!isEmojiPickerShowing);
     };
 
-    const handleEmojiClick = (e) => {
+    const handleEmojiClick: MouseEventHandler<HTMLUListElement> = (e): void => {
         e.stopPropagation();
-        if (e.target.classList.contains("emoji")) {
+        const target = e.target as HTMLUListElement;
+        if (target.classList.contains("emoji")) {
             setInput((prevInput) => ({
                 ...prevInput,
-                text: prevInput.text + e.target.innerText,
+                text: prevInput.text + target.innerText,
             }));
         }
     };
