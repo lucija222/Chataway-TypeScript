@@ -1,26 +1,33 @@
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
+import { IDataByCategory } from "../helpers/interfaces/IDataByCategory";
+import { IEmojiCategory } from "../helpers/interfaces/IEmojiCategory";
+import { IFilteredEmojiObject } from "../helpers/interfaces/IFilteredEmojiObject";
+import { TAllFilteredCategories } from "../helpers/types/TAllFilteredCategories";
+import { TFetchedEmojiData } from "../helpers/types/TFetchedEmojiData";
+import { TEmojiProps } from "../helpers/types/TEmojiProps";
 import { fetchData } from "../util/fetch";
 import "./emojis.scss";
 
-const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }) => {
-    const [selectedCategory, setSelectedCategory] = useState("smileys_emotion");
-    const [emojiData, setEmojiData] = useState([]);
+const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }: TEmojiProps): JSX.Element => {
+    const [selectedCategory, setSelectedCategory] = useState<string>("smileys_emotion");
+    const [emojiData, setEmojiData] = useState<TAllFilteredCategories>([]);
 
     if (!isEmojiPickerShowing && (selectedCategory !== "smileys_emotion")) {
         setSelectedCategory("smileys_emotion");
     };
 
-    const filterAndSetEmojiData = (data) => {
-        const allFilteredCategories = [];
+    const filterAndSetEmojiData = (data: TFetchedEmojiData): void => {
+        const allFilteredCategories: TAllFilteredCategories = [];
 
         for (const category of data) {
-            const dataByCategory = { slug: category.slug, emojis: [] };
+            const dataByCategory: IDataByCategory = { slug: category.slug, emojis: [] };
 
             for (const emojiObject of category.emojis) {
-                const filteredEmojiObject = {
+                const filteredEmojiObject: IFilteredEmojiObject = {
                     name: emojiObject.name,
                     emoji: emojiObject.emoji,
                 };
+
                 dataByCategory.emojis.push(filteredEmojiObject);
             }
 
@@ -34,7 +41,7 @@ const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }) => {
         fetchData("./json/emojis.json", filterAndSetEmojiData);
     }, []);
 
-    const displaySelectedEmojiCategory = () => {
+    const displaySelectedEmojiCategory = (): JSX.Element[] => {
         const selectedCategoryData = [];
         for (const category of emojiData) {
             if (category.slug === selectedCategory) {
@@ -43,17 +50,18 @@ const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }) => {
             }
         }
 
-        return selectedCategoryData.map((emojiObject) => (
+        return selectedCategoryData.map((emojiObject): JSX.Element => (
                 <li key={emojiObject.name} className="emoji">
                     {emojiObject.emoji}
                 </li>
         ));
     };
 
-    const handleEmojiCategories = (e) => {
+    const handleEmojiCategories: MouseEventHandler<HTMLUListElement> = (e): void => {
         e.stopPropagation();
-        if (e.target.dataset.categorySlug) {
-            const categorySlugDataset = e.target.dataset.categorySlug;
+        const target = e.target as HTMLUListElement;
+        if (target.dataset.categorySlug) {
+            const categorySlugDataset = target.dataset.categorySlug;
             setSelectedCategory(categorySlugDataset);
         }
     };
