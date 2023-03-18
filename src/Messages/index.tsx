@@ -1,20 +1,23 @@
 import { useEffect, useRef } from "react";
+import { IMember } from "../helpers/interfaces/IMember";
+import { IMessages } from "../helpers/interfaces/IMessages";
+import { TMessagesProps } from "../helpers/types/TMessagesProps";
 import { classNames } from "../util/helperFunctions";
 import "./messages.scss";
 
-const Messages = ({ messages, thisMember }) => {
-    const scrollIntoView = useRef();
+const Messages = ({ messages, thisMember }: TMessagesProps): JSX.Element => {
+    const scrollIntoView = useRef<HTMLSpanElement>(null!);
     let sameMember: string = "";
 
     useEffect(() => {
         scrollIntoView.current.scrollIntoView();
     }, [messages.length]);
 
-    const renderMessage = (message) => {
+    const renderMessage = (message: IMessages) => {
         const { member, data, id } = message;
-        const classNamesArray = [message, thisMember];
+        const classNamesArray: [IMessages, IMember] = [message, thisMember];
 
-        const memberData = (
+        const memberData: JSX.Element = (
             <div
                 className={classNames(
                     ...classNamesArray,
@@ -40,7 +43,7 @@ const Messages = ({ messages, thisMember }) => {
             </div>
         );
 
-        const textContainer = (
+        const textContainer: JSX.Element = (
             <div
                 className={classNames(
                     ...classNamesArray,
@@ -51,7 +54,7 @@ const Messages = ({ messages, thisMember }) => {
             </div>
         );
 
-        const listItem =
+        const listItem: JSX.Element =
             sameMember !== member.id ? (
                 <li
                     className={classNames(...classNamesArray, "classNameMsg")}
