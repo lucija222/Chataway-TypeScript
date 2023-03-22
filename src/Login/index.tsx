@@ -1,14 +1,17 @@
-import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useState } from "react";
+import { ChangeEventHandler, Dispatch, FormEventHandler, MouseEventHandler, SetStateAction, useState } from "react";
 import Avatars from "../Avatars/index.jsx";
-import { IChatState } from "../helpers/interfaces/IChatState.js";
-import { TLoginProps } from "../helpers/types/TLoginProps.js";
+import { IChatState } from "../helpers/globalInterfaces/IChatState.js";
 import {
     generateRandomColor,
     generateRandomName,
 } from "../util/helperFunctions.js";
 import "./login.scss";
 
-const Login = ({ setChat }: TLoginProps): JSX.Element => {
+interface ILoginProps {
+    setChat: Dispatch<SetStateAction<IChatState>>
+};
+
+const Login = ({ setChat }: ILoginProps): JSX.Element => {
     const [avatar, setAvatar] = useState<string>("");
     const [username, setUsername] = useState<string>("");
     const [avatarAnimation, setAvatarAnimation] = useState<boolean>(false);

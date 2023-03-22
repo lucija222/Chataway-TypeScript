@@ -1,11 +1,15 @@
 import { useEffect, useRef } from "react";
-import { IMember } from "../helpers/interfaces/IMember";
-import { IMessages } from "../helpers/interfaces/IMessages";
-import { TMessagesProps } from "../helpers/types/TMessagesProps";
+import { IMember } from "../helpers/globalInterfaces/IMember";
+import { IMessages } from "../helpers/globalInterfaces/IMessages";
 import { classNames } from "../util/helperFunctions";
 import "./messages.scss";
 
-const Messages = ({ messages, thisMember }: TMessagesProps): JSX.Element => {
+interface IMessagesProps {
+    messages: Array<IMessages>,
+    thisMember: IMember
+};
+
+const Messages = ({ messages, thisMember }: IMessagesProps): JSX.Element => {
     const scrollIntoView = useRef<HTMLSpanElement>(null!);
     let sameMember: string = "";
 

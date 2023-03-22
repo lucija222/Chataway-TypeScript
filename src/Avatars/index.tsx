@@ -1,7 +1,14 @@
-import { TAvatarsProps } from '../helpers/types/TAvatarsProps';
+import { MouseEventHandler } from 'react';
 import './avatars.scss';
 
-const Avatars = ({ random, getAvatar, avatarAnimation, selectedAvatar }: TAvatarsProps): JSX.Element => {
+interface IAvatarsProps {
+    random: boolean,
+    getAvatar: MouseEventHandler<HTMLImageElement>, 
+    avatarAnimation: boolean,
+    selectedAvatar: string 
+};
+
+const Avatars = ({ random, getAvatar, avatarAnimation, selectedAvatar }: IAvatarsProps): JSX.Element => {
     const avatars: Array<string> = [];
     for (let i = 1; i <= 6; i++) {
         const path: string = `/avatars/avatar${i}.png`;

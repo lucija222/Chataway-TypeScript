@@ -1,10 +1,18 @@
 import { useEffect, useState, useRef, ChangeEventHandler, FormEventHandler, MouseEventHandler } from "react";
 import Emojis from "../Emojis";
-import { IInitInput } from "../helpers/interfaces/IInitInput";
-import { TMessageInputProps } from "../helpers/types/TMessageInputProps";
+import { IMessage } from "../helpers/globalInterfaces/IMessage";
 import "./messageInput.scss";
 
-const MessageInput = ({ publishMessage }: TMessageInputProps): JSX.Element => {
+interface IMessageInputProps {
+    publishMessage: (messageObj: IMessage) => void
+};
+
+interface IInitInput {
+    text: string,
+    placeholder: string
+};
+
+const MessageInput = ({ publishMessage }: IMessageInputProps): JSX.Element => {
     const placeholder: Array<string> = [
         "Enter your message...",
         "Please type something first!"

@@ -5,11 +5,14 @@ import { CHANNEL_ID } from "./util/channel";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
-import { IChatState } from './helpers/interfaces/IChatState';
-import { IMembers } from './helpers/interfaces/IMembers';
-import { IMessage } from './helpers/interfaces/IMessage';
-import { IClientData } from './helpers/interfaces/IClientData';
-import { IMessages } from './helpers/interfaces/IMessages';
+import { IChatState } from './helpers/globalInterfaces/IChatState';
+import { IMessage } from './helpers/globalInterfaces/IMessage';
+import { IClientData } from './helpers/globalInterfaces/IClientData';
+import { IMessages } from './helpers/globalInterfaces/IMessages';
+
+interface IMembers {
+    online: Array<IClientData>
+};
 
 const App = (): JSX.Element => {
     const initChatState: IChatState = {
@@ -22,7 +25,7 @@ const App = (): JSX.Element => {
         messages: [],
     };
 
-    const [chat, setChat]/*: [IChatState, (value: ((prevState: IChatState) => IChatState)) => void]*/ = useState<IChatState>(initChatState);
+    const [chat, setChat] = useState<IChatState>(initChatState);
     const [members, setMembers] = useState<IMembers>({ online: [] });
     const [drone, setDrone] = useState(null);
 

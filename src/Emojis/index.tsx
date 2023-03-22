@@ -1,14 +1,41 @@
 import { MouseEventHandler, useEffect, useState } from "react";
-import { IDataByCategory } from "../helpers/interfaces/IDataByCategory";
-import { IEmojiCategory } from "../helpers/interfaces/IEmojiCategory";
-import { IFilteredEmojiObject } from "../helpers/interfaces/IFilteredEmojiObject";
-import { TAllFilteredCategories } from "../helpers/types/TAllFilteredCategories";
-import { TFetchedEmojiData } from "../helpers/types/TFetchedEmojiData";
-import { TEmojiProps } from "../helpers/types/TEmojiProps";
 import { fetchData } from "../util/fetch";
 import "./emojis.scss";
 
-const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }: TEmojiProps): JSX.Element => {
+interface IEmojiProps {
+    handleEmojiClick: MouseEventHandler<HTMLUListElement>,
+    isEmojiPickerShowing: boolean 
+};
+
+interface IFilteredEmojiObject {
+    name: string,
+    emoji: string
+};
+
+interface IDataByCategory {
+    slug: string,
+    emojis: Array<IFilteredEmojiObject>
+};
+
+type TAllFilteredCategories = Array<IDataByCategory>;
+
+interface IFetchedEmojiObject {
+    emoji: string,
+    skin_tone_support: boolean,
+    name: string,
+    slug: string,
+    unicode_version: string,
+    emoji_version: string
+};
+interface IEmojiCategory {
+    name: string,
+    slug: string,
+    emojis: Array<IFetchedEmojiObject>
+};
+
+type TFetchedEmojiData = Array<IEmojiCategory>;
+
+const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }: IEmojiProps): JSX.Element => {
     const [selectedCategory, setSelectedCategory] = useState<string>("smileys_emotion");
     const [emojiData, setEmojiData] = useState<TAllFilteredCategories>([]);
 

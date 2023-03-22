@@ -1,7 +1,11 @@
-import { TChatHeaderProps } from "../helpers/types/TChatHeaderProps";
+import { IClientData } from "../helpers/globalInterfaces/IClientData";
 import "./chatHeader.scss";
 
-const ChatHeader = ({  members }: TChatHeaderProps): JSX.Element => {
+interface IChatHeaderProps {
+    members: Array<IClientData>
+};
+
+const ChatHeader = ({  members }: IChatHeaderProps): JSX.Element => {
     return (
         <div>
             <div className="chat__header">
