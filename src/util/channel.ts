@@ -1,1 +1,1 @@
-export const CHANNEL_ID = "gkghqFT9XGclvu81";
+export const CHANNEL_ID: string = "gkghqFT9XGclvu81";

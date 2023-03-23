@@ -1,19 +1,21 @@
-export const classNames = (message, thisMember, whichClass) => {
+import { IMember } from "./globalInterfaces/IMember";
+import { IMessages } from "./globalInterfaces/IMessages";
+
+export const classNames = (message: IMessages, thisMember: IMember, whichClass: string) => {
     const { member } = message;
 
     const thisMemberMessage =
-        member.id === thisMember.id ||
-        message.from_me 
+        member.id === thisMember.id 
 
-    let classNameMessage = thisMemberMessage
+    let classNameMessage: string = thisMemberMessage
         ? "msg-list__msg msg-list__msg--thisMember"
         : "msg-list__msg";
 
-    const classNameMemberData = thisMemberMessage 
+    const classNameMemberData: string = thisMemberMessage 
     ? "msg-list__member-data msg-list__member-data--thisMember"
     : "msg-list__member-data";
 
-    const classNameTextContainer = thisMemberMessage 
+    const classNameTextContainer: string = thisMemberMessage 
     ? "msg-list__text-container msg-list__text-container--thisMember"
     : "msg-list__text-container";
 
@@ -29,11 +31,11 @@ export const classNames = (message, thisMember, whichClass) => {
       }
 };
 
-export const generateRandomColor = () => {
+export const generateRandomColor = (): string => {
     return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 };
 
-export const generateRandomName = () => {
+export const generateRandomName = (): string => {
     const adjectives = [
         "Autumn",
         "Hidden",
