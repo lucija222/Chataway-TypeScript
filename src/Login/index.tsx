@@ -1,6 +1,6 @@
 import { ChangeEventHandler, Dispatch, FormEventHandler, MouseEventHandler, SetStateAction, useState } from "react";
 import Avatars from "../Avatars/index.jsx";
-import { IChatState } from "../helpers/globalInterfaces/IChatState.js";
+import { IChatState } from "../util/globalInterfaces/IChatState.js";
 import {
     generateRandomColor,
     generateRandomName,

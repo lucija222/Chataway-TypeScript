@@ -5,13 +5,51 @@ import { CHANNEL_ID } from "./util/channel";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
-import { IChatState } from './helpers/globalInterfaces/IChatState';
-import { IMessage } from './helpers/globalInterfaces/IMessage';
-import { IClientData } from './helpers/globalInterfaces/IClientData';
-import { IMessages } from './helpers/globalInterfaces/IMessages';
+import { IChatState } from './util/globalInterfaces/IChatState';
+import { IMessage } from './util/globalInterfaces/IMessage';
+import { IClientData } from './util/globalInterfaces/IClientData';
+import { IMessages } from './util/globalInterfaces/IMessages';
+import { IMember } from './util/globalInterfaces/IMember';
 
 interface IMembers {
     online: Array<IClientData>
+};
+
+interface IMemberLeave {
+    id: string
+}
+
+interface IScaledroneOptions {
+    data?: IMember,
+    url?: string,
+    autoRecconect?: boolean,
+    reconnectInterval?: number
+};
+
+interface Room {
+    on<Event extends keyof RoomEvents>(event: Event, callback: (data: RoomEvents[Event]) => void): void;
+};
+
+interface RoomEvents {
+    open: any,
+    message: any;
+    members: Array<IClientData>;
+    member_join: IClientData;
+    member_leave: IMemberLeave;
+}
+
+declare class Scaledrone {
+    constructor(channelId: string, options?: IScaledroneOptions);
+    subscribe(roomName: string): Room;
+    publish(options: IMessage): void;
+    on(event: "open", callback: (error: any) => void): void;
+    clientId: string
+};
+
+declare global {
+    interface Window {
+        Scaledrone: typeof Scaledrone;
+    }
 };
 
 const App = (): JSX.Element => {
@@ -27,7 +65,7 @@ const App = (): JSX.Element => {
 
     const [chat, setChat] = useState<IChatState>(initChatState);
     const [members, setMembers] = useState<IMembers>({ online: [] });
-    const [drone, setDrone] = useState(null);
+    const [drone, setDrone] = useState<Scaledrone | {}>({});
 
     useEffect(() => {
         if (chat.member.username !== "") {
@@ -39,19 +77,21 @@ const App = (): JSX.Element => {
     }, [chat.member]);
 
     useEffect(() => {
+        const droneScaledrone = drone as Scaledrone;
+
         const droneEvent = (): void => {
-            drone.on("open", (error) => {
+            droneScaledrone.on("open", (error: any) => {
                 if (error) {
                     return console.error(error);
                 }
-                chat.member.id = drone.clientId;
+                chat.member.id = droneScaledrone.clientId;
                 roomEvents();
             });
         };
 
         const roomEvents = (): void => {
-            const room = drone.subscribe("observable-room");
-            room.on("open", (error) => {
+            const room = droneScaledrone.subscribe("observable-room");
+            room.on("open", (error: any) => {
                 if (error) {
                     console.error(error);
                 } else {
@@ -69,7 +109,7 @@ const App = (): JSX.Element => {
                 }));
             });
 
-            room.on("member_leave", ({ id }: string) => { //How is it not string?
+            room.on("member_leave", ({ id }: IMemberLeave ) => { 
                 setMembers((prevMembers) => { 
                     const index: number = prevMembers.online.findIndex(
                       (member) => member.id === id
@@ -98,9 +138,9 @@ const App = (): JSX.Element => {
     }, [chat, drone, members]);
 
     const publishMessage = (messageObj: IMessage): void => {
-        drone.publish(messageObj);
+        const droneScaledrone = drone as Scaledrone;
+        droneScaledrone.publish(messageObj);
     };
-
 
     return (
         <>

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { IMember } from "../helpers/globalInterfaces/IMember";
-import { IMessages } from "../helpers/globalInterfaces/IMessages";
+import { IMember } from "../util/globalInterfaces/IMember";
+import { IMessages } from "../util/globalInterfaces/IMessages";
 import { classNames } from "../util/helperFunctions";
 import "./messages.scss";
 

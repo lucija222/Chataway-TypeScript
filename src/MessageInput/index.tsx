@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, ChangeEventHandler, FormEventHandler, MouseEventHandler } from "react";
 import Emojis from "../Emojis";
-import { IMessage } from "../helpers/globalInterfaces/IMessage";
+import { IMessage } from "../util/globalInterfaces/IMessage";
 import "./messageInput.scss";
 
 interface IMessageInputProps {

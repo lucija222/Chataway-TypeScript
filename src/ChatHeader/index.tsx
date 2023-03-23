@@ -1,4 +1,4 @@
-import { IClientData } from "../helpers/globalInterfaces/IClientData";
+import { IClientData } from "../util/globalInterfaces/IClientData";
 import "./chatHeader.scss";
 
 interface IChatHeaderProps {

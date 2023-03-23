@@ -33,7 +33,7 @@ interface IEmojiCategory {
     emojis: Array<IFetchedEmojiObject>
 };
 
-type TFetchedEmojiData = Array<IEmojiCategory>;
+export type TFetchedEmojiData = Array<IEmojiCategory>;
 
 const Emoji = ({ handleEmojiClick, isEmojiPickerShowing }: IEmojiProps): JSX.Element => {
     const [selectedCategory, setSelectedCategory] = useState<string>("smileys_emotion");
