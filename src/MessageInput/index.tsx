@@ -37,6 +37,7 @@ const MessageInput = ({ publishMessage }: IMessageInputProps): JSX.Element => {
                 placeholder: placeholder[1],
             });
         } else {
+            setIsEmojiPickerShowing(false);
             const message = input.text;
             publishMessage({
                 message: message,
