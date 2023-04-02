@@ -1,10 +1,10 @@
 import { ChangeEventHandler, Dispatch, FormEventHandler, MouseEventHandler, SetStateAction, useState } from "react";
-import Avatars from "../Avatars/index.jsx";
-import { IChatState } from "../util/globalInterfaces/IChatState.js";
+import Avatars from "../Avatars";
+import { IChatState } from "../util/globalInterfaces/IChatState";
 import {
     generateRandomColor,
     generateRandomName,
-} from "../util/helperFunctions.js";
+} from "../util/helperFunctions";
 import "./login.scss";
 
 interface ILoginProps {
